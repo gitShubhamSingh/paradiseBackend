@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-q5o#f*tv#owa#^+9(xj3$jp03jjs9@n+al#v6+l(5@kcqjv3$9
 DEBUG = True
 
 ALLOWED_HOSTS = ['3.109.155.49']
-
+# This code is for checking the github WebHook Triger
 
 
 
