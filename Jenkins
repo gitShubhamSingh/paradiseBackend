@@ -1,0 +1,42 @@
+pipeline {
+		agent any
+		stages{
+	        stage("cloneCode"){
+	            steps {
+	                echo "Cloning the code"
+	                git url:"https://github.com/gitShubhamSingh/paradiseBackend.git",branch:"production"
+                }
+            }
+            stage("build"){
+	            steps {
+	                echo "Building the image"
+	                sh "docker build -t paradise-backend ."
+                }
+            }
+            stage("pushToDockerHub"){
+	            steps {
+	                echo "Pushing the image to Docker hub"
+	                withCredentials(
+	                    [
+	                        usernamePassword(
+	                            credentialsId:"dockerHubParadise", 
+	                            passwordVariable:"dockerHubPass", 
+	                            usernameVariable:"dockerHubUser"
+	                       )
+	                   ]
+	               ){
+	                   sh "docker tag paradise-app ${env.dockerHubUser}/paradise-app:latest"
+	                   sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
+	                   sh "docker push ${env.dockerHubUser}/paradise-app:latest"
+	               }
+
+                }
+            }
+            stage("deploy"){
+	            steps {
+	                echo "Deploying the container"
+                     sh "docker-compose down && docker-compose up -d"
+                }
+            }
+        }
+    }
