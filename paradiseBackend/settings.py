@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-q5o#f*tv#owa#^+9(xj3$jp03jjs9@n+al#v6+l(5@kcqjv3$9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['3.109.155.49']
+
+ALLOWED_HOSTS = ['13.126.85.5','paradiseconsultant.in','www.paradiseconsultant.in']
 
 
 
